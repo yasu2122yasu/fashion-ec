@@ -16,6 +16,14 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', [ProductController::class, 'index'])->name('product.index');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+Route::controller(ProductController::class)->group(function () {
+    Route::name('product.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('product/{id}', 'show')->name('show');
+    });
+});
 
 
 Route::get('/dashboard', function () {
@@ -27,5 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
 
 require __DIR__ . '/auth.php';
