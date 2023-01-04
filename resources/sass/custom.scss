@@ -20,18 +20,6 @@
   }
 }
 
-.top-img {
-  background-image: url("../../public/images/top.jpg");
-    background-size: cover;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  .top-img-text {
-
-  }
-}
-
 .card {
   &-product-name {
     padding: 12px;
