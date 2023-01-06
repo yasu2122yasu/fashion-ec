@@ -3,7 +3,7 @@
 
 <head>
     <title>@yield('title') | {{ config('app.name', 'Laravel')}} </title>
-    @vite('resources/sass/custom.scss')
+    @vite('resources/sass/app.scss')
 </head>
 
 <body>
