@@ -25,6 +25,13 @@
           <div class="card__total-price col-3 text-center">
             ￥{{ number_format($item->price * $item->pivot->quantity) }}
           </div>
+          <form method="post" action="{{ route('line_item.delete') }}">
+            @csrf
+            <div class="card__btn-trash col-1">
+              <input type="hidden" name="id" value="{{ $item->pivot->id }}" />
+              <button type="submit" class="fas fa-trash-alt btn"></button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
