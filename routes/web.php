@@ -25,9 +25,16 @@ Route::controller(ProductController::class)->group(function () {
     });
 });
 
+// Route::name('line_item.')
+//     ->group(function () {
+//         Route::post('/line_item/create', 'LineItemController@create')->name('create');
+//         Route::post('/line_item/delete', 'LineItemController@delete')->name('delete');
+//     });
+
 Route::controller(LineItemController::class)->group(function () {
     Route::name('line_item.')->group(function () {
         Route::post('/line_item/create', 'create')->name('create');
+        Route::post('/line_item/delete', 'delete')->name('delete');
     });
 });
 
