@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LineItemController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ Route::controller(LineItemController::class)->group(function () {
     });
 });
 
+Route::controller(CartController::class)->group(function () {
+    Route::name('cart.')->group(function () {
+        Route::get('/cart', 'index')->name('index');
+    });
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

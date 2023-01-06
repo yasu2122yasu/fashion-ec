@@ -26,6 +26,7 @@ class LineItemController extends Controller
                 'quantity' => $request->input('quantity'),
             ]);
         }
+
         return redirect(route('product.index'));
     }
 }
