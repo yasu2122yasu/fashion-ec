@@ -41,7 +41,8 @@ Route::controller(LineItemController::class)->group(function () {
 Route::controller(CartController::class)->group(function () {
     Route::name('cart.')->group(function () {
         Route::get('/cart', 'index')->name('index');
-        Route::get('/cart/chechkout', 'checkout')->name('checkout');
+        Route::get('/cart/checkout', 'checkout')->name('checkout');
+        Route::get('cart/success', 'success')->name('success');
     });
 });
 

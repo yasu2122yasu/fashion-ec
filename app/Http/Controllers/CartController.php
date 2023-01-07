@@ -43,16 +43,16 @@ class CartController extends Controller
                 'quantity' => $product->pivot->quantity,
             ];
             // array_pushメソッドは配列の末尾に値を追加することができる。
-            array_push($line_item, $line_item);
+            array_push($line_items, $line_item);
         }
 
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         // \Stripe\Checkout\Session クラスはStripe Checkoutのセッションに関するクラス。
         $session = \Stripe\Checkout\Session::create([
-            'payment_method_type' => ['card'],
+            'payment_method_types' => ['card'],
             'line_items' => [$line_items],
-            'success_url' => route('product.index'),
+            'success_url' => route('cart.success'),
             'cancel_url' => route('cart.index'),
             // 今回はクレジットカードでの実装をする予定
             'mode' => 'payment',
@@ -61,7 +61,15 @@ class CartController extends Controller
         return view('cart.checkout', [
             // 配列を使うとwithを利用せずに渡すこともできる！
             'session' => $session,
-            'publickey' => env('STRIPE_PUBLIC_KEY')
+            'publicKey' => env('STRIPE_PUBLIC_KEY')
         ]);
+    }
+
+    public function success()
+    {
+        $cart_id = Session::get('cart');
+        LineItem::where('cart_id', $cart_id)->delete();
+
+        return redirect(route('product.index'));
     }
 }
